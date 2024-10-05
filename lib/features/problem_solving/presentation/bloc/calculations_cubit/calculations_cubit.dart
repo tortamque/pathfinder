@@ -39,7 +39,7 @@ class CalculationsCubit extends Cubit<CalculationsState> {
       if (progress <= 49) {
         emit(state.copyWith(progress: progress / 100));
       }
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 200));
     }
   }
 
