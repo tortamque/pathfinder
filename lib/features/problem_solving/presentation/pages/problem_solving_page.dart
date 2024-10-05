@@ -36,47 +36,50 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Process screen'),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const Spacer(),
-                Text(
-                  _getStatusText(state),
-                  style: context.textStyles.regular,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: Text(
-                    '${(state.progress * 100).floor()}%',
+        return PopScope(
+          canPop: state.progress == 1,
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Process screen'),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Text(
+                    _getStatusText(state),
                     style: context.textStyles.regular,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: SizedBox.square(
-                    dimension: 72,
-                    child: CircularProgressIndicator(
-                      value: state.progress,
-                      strokeCap: StrokeCap.round,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Text(
+                      '${(state.progress * 100).floor()}%',
+                      style: context.textStyles.regular,
                     ),
                   ),
-                ),
-                const Spacer(),
-                MainButton(
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  onPressed: state.progress == 1 && state.error == null
-                      ? () => context.read<CalculationsCubit>().sendTasks(state.solvedMazes ?? [])
-                      : null,
-                  child: Text(
-                    state.isUploaded == null ? "Send results to server" : "Results checked",
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: SizedBox.square(
+                      dimension: 72,
+                      child: CircularProgressIndicator(
+                        value: state.progress,
+                        strokeCap: StrokeCap.round,
+                      ),
+                    ),
                   ),
-                )
-              ],
+                  const Spacer(),
+                  MainButton(
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    onPressed: state.progress == 1 && state.error == null
+                        ? () => context.read<CalculationsCubit>().sendTasks(state.solvedMazes ?? [])
+                        : null,
+                    child: Text(
+                      state.isUploaded == null ? "Send results to server" : "Results checked",
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
