@@ -44,12 +44,14 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
             child: Column(
               children: [
                 const Spacer(),
-                //TODO Placeholder
                 Text(
-                  'Here will be calculations text',
+                  state.solvedMazes == null
+                      ? 'Getting tasks and solving them... 🛠️'
+                      : state.solvedMazes != null && state.isUploaded == null
+                          ? 'Problem solved and ready to be checked 🚀'
+                          : 'Tasks solved and checked ✅',
                   style: context.textStyles.regular,
                 ),
-                //TODO Placeholder
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: Text(
@@ -57,7 +59,6 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                     style: context.textStyles.regular,
                   ),
                 ),
-                //TODO Placeholder
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: SizedBox.square(
@@ -73,7 +74,9 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                   onPressed: state.progress == 1 && state.error == null
                       ? () => context.read<CalculationsServiceCubit>().sendTasks(state.solvedMazes ?? [])
                       : null,
-                  child: const Text("Send results to server"),
+                  child: Text(
+                    state.isUploaded == null ? "Send results to server" : "Results checked",
+                  ),
                 )
               ],
             ),

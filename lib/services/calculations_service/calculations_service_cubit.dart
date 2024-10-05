@@ -66,8 +66,16 @@ class CalculationsServiceCubit extends Cubit<CalculationsServiceState> {
   }
 
   Future<void> sendTasks(List<SolvedMazeModel> solvedMazes) async {
+    emit(state.copyWith(progress: 0));
+
+    _completer = Completer<void>();
+    _updateSendingProgressWhileUploading();
+
     final List<Map<String, dynamic>> solvedMazeJsons = solvedMazes.map((solvedMaze) => solvedMaze.toJson()).toList();
+
     final result = await swaggerRepository.sendTask(solvedMazeJsons);
+
+    _completer?.complete();
 
     if (result is ErrorResponse) {
       emit(state.copyWith(error: result.error));
@@ -75,5 +83,16 @@ class CalculationsServiceCubit extends Cubit<CalculationsServiceState> {
     }
 
     emit(state.copyWith(isUploaded: true, progress: 1));
+  }
+
+  Future<void> _updateSendingProgressWhileUploading() async {
+    double progress = 0;
+    while (!_completer!.isCompleted) {
+      progress += 1;
+      if (progress <= 99) {
+        emit(state.copyWith(progress: progress / 100));
+      }
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
   }
 }
