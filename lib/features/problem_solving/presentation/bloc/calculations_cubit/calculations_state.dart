@@ -1,25 +1,25 @@
-part of 'calculations_service_cubit.dart';
+part of 'calculations_cubit.dart';
 
-class CalculationsServiceState {
+class CalculationsState {
   final double progress;
   final String? error;
   final List<SolvedMazeModel>? solvedMazes;
   final bool? isUploaded;
 
-  CalculationsServiceState({
+  CalculationsState({
     this.progress = 0,
     this.error,
     this.solvedMazes,
     this.isUploaded,
   });
 
-  CalculationsServiceState copyWith({
+  CalculationsState copyWith({
     double? progress,
     String? error,
     List<SolvedMazeModel>? solvedMazes,
     bool? isUploaded,
   }) {
-    return CalculationsServiceState(
+    return CalculationsState(
       progress: progress ?? this.progress,
       error: error ?? this.error,
       solvedMazes: solvedMazes ?? this.solvedMazes,
@@ -30,7 +30,7 @@ class CalculationsServiceState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CalculationsServiceState &&
+      other is CalculationsState &&
           runtimeType == other.runtimeType &&
           progress == other.progress &&
           error == other.error &&
@@ -42,6 +42,6 @@ class CalculationsServiceState {
 
   @override
   String toString() {
-    return 'CalculationsServiceState(progress: $progress, error: $error, solvedMazes: $solvedMazes, isUploaded: $isUploaded)';
+    return 'CalculationsState(progress: $progress, error: $error, solvedMazes: $solvedMazes, isUploaded: $isUploaded)';
   }
 }
