@@ -16,6 +16,7 @@ class CalculationsServiceCubit extends Cubit<CalculationsServiceState> {
   Completer<void>? _completer;
 
   Future<void> solveTask() async {
+    emit(CalculationsServiceState());
     _completer = Completer<void>();
     _updateLoadingProgressWhileLoading();
 
@@ -73,6 +74,6 @@ class CalculationsServiceCubit extends Cubit<CalculationsServiceState> {
       return;
     }
 
-    emit(state.copyWith(isUploaded: true));
+    emit(state.copyWith(isUploaded: true, progress: 1));
   }
 }

@@ -1,6 +1,6 @@
 part of 'calculations_service_cubit.dart';
 
-final class CalculationsServiceState {
+class CalculationsServiceState {
   final double progress;
   final String? error;
   final List<SolvedMazeModel>? solvedMazes;
@@ -39,4 +39,9 @@ final class CalculationsServiceState {
 
   @override
   int get hashCode => progress.hashCode ^ error.hashCode;
+
+  @override
+  String toString() {
+    return 'CalculationsServiceState(progress: $progress, error: $error, solvedMazes: $solvedMazes, isUploaded: $isUploaded)';
+  }
 }
