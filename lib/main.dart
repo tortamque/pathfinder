@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pathfinder/config/routes/app_router.dart';
-import 'package:pathfinder/config/themes/light/light_theme.dart';
+import 'package:pathfinder/app/app.dart';
+import 'package:pathfinder/bootstrap.dart';
+import 'package:pathfinder/config/config_model/dev/dev_config.dart';
 
-void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      routerConfig: router,
-    );
-  }
+void main() async {
+  runApp(
+    bootstrap(
+      configModel: devConfig,
+      child: const MainApp(),
+    ),
+  );
 }
