@@ -33,6 +33,11 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
           );
         }
         if (state.isUploaded == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Server has checked the results and they are correct!'),
+            ),
+          );
           ResultsPreviewRoute($extra: state.solvedMazes ?? []).pushReplacement(context);
         }
       },
