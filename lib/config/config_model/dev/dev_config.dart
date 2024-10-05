@@ -1,3 +1,6 @@
 import 'package:pathfinder/config/config_model/config_model.dart';
 
-final devConfig = ConfigModel(baseUrl: 'https://flutter.webspark.dev/');
+final devConfig = ConfigModel(
+  baseUrl: 'https://flutter.webspark.dev/',
+  path: 'flutter/api',
+);

@@ -12,11 +12,13 @@ class EnterUrlTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.swap_horiz_rounded),
+        const Icon(Icons.swap_horiz_rounded),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: TextField(),
+            child: TextField(
+              controller: controller,
+            ),
           ),
         ),
       ],
