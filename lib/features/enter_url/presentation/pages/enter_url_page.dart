@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               MainButton(
                 onPressed: () => context.read<UrlVerifierCubit>().verifyUrl(input),
-                padding: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 18),
                 child: const Text('Start counting process'),
               ),
             ],

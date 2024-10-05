@@ -72,6 +72,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                 ),
                 const Spacer(),
                 MainButton(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
                   onPressed: state.progress == 1 && state.error == null
                       ? () => context.read<CalculationsCubit>().sendTasks(state.solvedMazes ?? [])
                       : null,
