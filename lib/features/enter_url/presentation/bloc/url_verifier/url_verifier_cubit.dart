@@ -16,6 +16,12 @@ class UrlVerifierCubit extends Cubit<UrlVerifierState> {
     final result =
         parsedUrl.scheme == 'https' && parsedUrl.host == 'flutter.webspark.dev' && parsedUrl.path == '/flutter/api';
 
-    result ? emit(UrlVerifiedSuccess()) : emit(UrlVerifiedFailure('Invalid URL'));
+    result
+        ? emit(
+            UrlVerifiedSuccess(url: parsedUrl),
+          )
+        : emit(
+            UrlVerifiedFailure('Invalid URL'),
+          );
   }
 }

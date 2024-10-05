@@ -16,7 +16,7 @@ class SwaggerRepository {
 
   Future<AppResponse<MazeResponse>> getTask() async {
     try {
-      final response = await _client.get(config.path);
+      final response = await _client.get(config.path!);
 
       if (response.statusCode == 200) {
         final responseData = response.data as Map<String, dynamic>;
@@ -35,7 +35,7 @@ class SwaggerRepository {
   Future<AppResponse<SendTaskResponse>> sendTask(List<Map<String, dynamic>> solvedMazeJsons) async {
     try {
       final response = await _client.post(
-        config.path,
+        config.path!,
         data: solvedMazeJsons,
       );
 

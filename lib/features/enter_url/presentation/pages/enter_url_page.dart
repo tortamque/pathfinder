@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return BlocListener<UrlVerifierCubit, UrlVerifierState>(
       listener: (context, state) {
         if (state is UrlVerifiedSuccess) {
-          const ProblemSolvingRoute().push(context);
+          ProblemSolvingRoute($extra: state.url).push(context);
         } else if (state is UrlVerifiedFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
