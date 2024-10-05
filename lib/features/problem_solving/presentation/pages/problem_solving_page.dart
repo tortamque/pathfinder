@@ -41,14 +41,23 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                   style: context.textStyles.regular,
                 ),
                 //TODO Placeholder
-                Text(
-                  '${state is TaskLoadingState ? (state.progress * 100).floor() : 0}%',
-                  style: context.textStyles.regular,
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Text(
+                    '${state is TaskLoadingState ? (state.progress * 100).floor() : 0}%',
+                    style: context.textStyles.regular,
+                  ),
                 ),
                 //TODO Placeholder
-                CircularProgressIndicator(
-                  value: state is TaskLoadingState ? state.progress : 0,
-                  strokeCap: StrokeCap.round,
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: SizedBox.square(
+                    dimension: 72,
+                    child: CircularProgressIndicator(
+                      value: state is TaskLoadingState ? state.progress : 0,
+                      strokeCap: StrokeCap.round,
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 MainButton(
