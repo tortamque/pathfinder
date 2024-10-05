@@ -78,7 +78,7 @@ class CalculationsCubit extends Cubit<CalculationsState> {
     _completer?.complete();
 
     if (result is ErrorResponse) {
-      emit(state.copyWith(error: result.error));
+      emit(state.copyWith(error: result.error.toString()));
       return;
     }
 

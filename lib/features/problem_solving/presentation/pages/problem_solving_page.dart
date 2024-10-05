@@ -31,6 +31,8 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
               content: Text(state.error!),
             ),
           );
+
+          const HomeRoute().pushReplacement(context);
         }
         if (state.isUploaded == true) {
           ScaffoldMessenger.of(context).showSnackBar(
