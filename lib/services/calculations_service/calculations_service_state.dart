@@ -4,12 +4,10 @@ sealed class CalculationsServiceState {}
 
 final class InitialState extends CalculationsServiceState {}
 
-final class TaskLoadingState extends CalculationsServiceState {}
+final class TaskLoadingState extends CalculationsServiceState {
+  final double progress;
 
-final class TaskSolvingState extends CalculationsServiceState {}
+  TaskLoadingState({required this.progress});
+}
 
-final class TaskSolvedState extends CalculationsServiceState {}
-
-final class TaskVerificationState extends CalculationsServiceState {}
-
-final class TaskVerifiedState extends CalculationsServiceState {}
+final class TaskErrorState extends CalculationsServiceState {}

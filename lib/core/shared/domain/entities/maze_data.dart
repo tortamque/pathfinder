@@ -23,4 +23,9 @@ class MazeData {
       end: Position.fromJson(json['end']),
     );
   }
+
+  @override
+  String toString() {
+    return 'MazeData(id: $id, field: $field, start: $start, end: $end)';
+  }
 }

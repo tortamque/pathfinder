@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class MainButton extends StatelessWidget {
   const MainButton({
     super.key,
-    required this.onPressed,
     required this.child,
+    this.onPressed,
     this.width = double.infinity,
     this.padding = EdgeInsets.zero,
   });
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
   final double width;
   final EdgeInsets padding;
