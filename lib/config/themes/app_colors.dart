@@ -2,21 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppColors extends ThemeExtension<AppColors> {
   final Brightness brightness;
-  final Color startCell;
-  final Color endCell;
-  final Color blockedCell;
-  final Color pathCell;
-  final Color emptyCell;
   final Color primary;
+  final Color secondary;
 
   AppColors({
     required this.brightness,
-    required this.startCell,
-    required this.endCell,
-    required this.blockedCell,
-    required this.pathCell,
-    required this.emptyCell,
     required this.primary,
+    required this.secondary,
   });
 
   factory AppColors.of(BuildContext context) => Theme.of(context).extension<AppColors>()!;
@@ -24,21 +16,13 @@ class AppColors extends ThemeExtension<AppColors> {
   @override
   AppColors copyWith({
     Brightness? brightness,
-    Color? startCell,
-    Color? endCell,
-    Color? blockedCell,
-    Color? pathCell,
-    Color? emptyCell,
     Color? primary,
+    Color? secondary,
   }) {
     return AppColors(
       brightness: brightness ?? this.brightness,
-      startCell: startCell ?? this.startCell,
-      endCell: endCell ?? this.endCell,
-      blockedCell: blockedCell ?? this.blockedCell,
-      pathCell: pathCell ?? this.pathCell,
-      emptyCell: emptyCell ?? this.emptyCell,
       primary: primary ?? this.primary,
+      secondary: secondary ?? this.secondary,
     );
   }
 
@@ -49,12 +33,8 @@ class AppColors extends ThemeExtension<AppColors> {
 
     return AppColors(
       brightness: brightness,
-      startCell: Color.lerp(startCell, other.startCell, t)!,
-      endCell: Color.lerp(endCell, other.endCell, t)!,
-      blockedCell: Color.lerp(blockedCell, other.blockedCell, t)!,
-      pathCell: Color.lerp(pathCell, other.pathCell, t)!,
-      emptyCell: Color.lerp(emptyCell, other.emptyCell, t)!,
       primary: Color.lerp(primary, other.primary, t)!,
+      secondary: Color.lerp(secondary, other.secondary, t)!,
     );
   }
 }

@@ -5,5 +5,8 @@ ThemeData getTheme(AppColors colors) => ThemeData(
       useMaterial3: true,
       extensions: [colors],
       brightness: colors.brightness,
-      colorSchemeSeed: colors.primary,
+      colorScheme: ColorScheme.fromSeed(seedColor: colors.primary),
+      appBarTheme: AppBarTheme(
+        backgroundColor: colors.secondary,
+      ),
     );
