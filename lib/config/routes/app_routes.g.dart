@@ -10,6 +10,7 @@ List<RouteBase> get $appRoutes => [
       $homeRoute,
       $problemSolvingRoute,
       $resultsPreviewRoute,
+      $viewResultRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -70,6 +71,32 @@ extension $ResultsPreviewRouteExtension on ResultsPreviewRoute {
 
   String get location => GoRouteData.$location(
         '/results-preview',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
+RouteBase get $viewResultRoute => GoRouteData.$route(
+      path: '/view-result',
+      factory: $ViewResultRouteExtension._fromState,
+    );
+
+extension $ViewResultRouteExtension on ViewResultRoute {
+  static ViewResultRoute _fromState(GoRouterState state) => ViewResultRoute(
+        $extra: state.extra as SolvedMazeModel,
+      );
+
+  String get location => GoRouteData.$location(
+        '/view-result',
       );
 
   void go(BuildContext context) => context.go(location, extra: $extra);
