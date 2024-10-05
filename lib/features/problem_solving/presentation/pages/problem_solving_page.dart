@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pathfinder/config/routes/app_routes.dart';
 import 'package:pathfinder/config/themes/extensions.dart';
 import 'package:pathfinder/features/problem_solving/presentation/bloc/calculations_cubit/calculations_cubit.dart';
+import 'package:pathfinder/features/problem_solving/presentation/widgets/custom_loader.dart';
 import 'package:pathfinder/widgets/buttons/main_button.dart';
 
 class ProblemSolvingPage extends StatefulWidget {
@@ -60,13 +61,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 12),
-                    child: SizedBox.square(
-                      dimension: 72,
-                      child: CircularProgressIndicator(
-                        value: state.progress,
-                        strokeCap: StrokeCap.round,
-                      ),
-                    ),
+                    child: CustomLoader(progress: state.progress),
                   ),
                   const Spacer(),
                   MainButton(
