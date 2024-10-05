@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pathfinder/main.dart';
+import 'package:pathfinder/features/enter_url/presentation/pages/enter_url_page.dart';
 
 part 'app_routes.g.dart';
 
-@TypedGoRoute<EnterUrlRoute>(path: '/')
-final class EnterUrlRoute extends GoRouteData {
-  const EnterUrlRoute();
+@TypedGoRoute<HomeRoute>(path: '/')
+final class HomeRoute extends GoRouteData {
+  const HomeRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return TestRoute();
+    return const HomePage();
   }
 }

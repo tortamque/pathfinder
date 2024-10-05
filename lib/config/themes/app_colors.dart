@@ -7,6 +7,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color blockedCell;
   final Color pathCell;
   final Color emptyCell;
+  final Color primary;
 
   AppColors({
     required this.brightness,
@@ -15,6 +16,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.blockedCell,
     required this.pathCell,
     required this.emptyCell,
+    required this.primary,
   });
 
   factory AppColors.of(BuildContext context) => Theme.of(context).extension<AppColors>()!;
@@ -27,6 +29,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? blockedCell,
     Color? pathCell,
     Color? emptyCell,
+    Color? primary,
   }) {
     return AppColors(
       brightness: brightness ?? this.brightness,
@@ -35,6 +38,7 @@ class AppColors extends ThemeExtension<AppColors> {
       blockedCell: blockedCell ?? this.blockedCell,
       pathCell: pathCell ?? this.pathCell,
       emptyCell: emptyCell ?? this.emptyCell,
+      primary: primary ?? this.primary,
     );
   }
 
@@ -50,6 +54,7 @@ class AppColors extends ThemeExtension<AppColors> {
       blockedCell: Color.lerp(blockedCell, other.blockedCell, t)!,
       pathCell: Color.lerp(pathCell, other.pathCell, t)!,
       emptyCell: Color.lerp(emptyCell, other.emptyCell, t)!,
+      primary: Color.lerp(primary, other.primary, t)!,
     );
   }
 }

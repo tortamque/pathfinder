@@ -8,4 +8,5 @@ final lightColors = AppColors(
   blockedCell: const Color(0xFF000000),
   pathCell: const Color(0xFF4CAF50),
   emptyCell: const Color(0xFFFFFFFF),
+  primary: Colors.blueAccent,
 );
