@@ -7,16 +7,16 @@ import 'package:pathfinder/core/shared/domain/entities/maze_response.dart';
 import 'package:pathfinder/core/shared/domain/entities/solved_maze_model.dart';
 import 'package:pathfinder/features/problem_solving/domain/entities/a_star_algorithm.dart';
 
-part 'calculations_service_state.dart';
+part 'calculations_state.dart';
 
-class CalculationsServiceCubit extends Cubit<CalculationsServiceState> {
-  CalculationsServiceCubit(this.swaggerRepository) : super(CalculationsServiceState());
+class CalculationsCubit extends Cubit<CalculationsState> {
+  CalculationsCubit(this.swaggerRepository) : super(CalculationsState());
 
   final SwaggerRepository swaggerRepository;
   Completer<void>? _completer;
 
   Future<void> solveTask() async {
-    emit(CalculationsServiceState());
+    emit(CalculationsState());
     _completer = Completer<void>();
     _updateLoadingProgressWhileLoading();
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pathfinder/config/routes/app_routes.dart';
 import 'package:pathfinder/config/themes/extensions.dart';
-import 'package:pathfinder/services/calculations_service/calculations_service_cubit.dart';
+import 'package:pathfinder/features/problem_solving/presentation/bloc/calculations_cubit/calculations_cubit.dart';
 import 'package:pathfinder/widgets/buttons/main_button.dart';
 
 class ProblemSolvingPage extends StatefulWidget {
@@ -16,12 +17,12 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
   void initState() {
     super.initState();
 
-    context.read<CalculationsServiceCubit>().solveTask();
+    context.read<CalculationsCubit>().solveTask();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CalculationsServiceCubit, CalculationsServiceState>(
+    return BlocConsumer<CalculationsCubit, CalculationsState>(
       listener: (context, state) {
         if (state.error != null) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -31,7 +32,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
           );
         }
         if (state.isUploaded == true) {
-          print('can redirrect');
+          ResultsPreviewRoute($extra: state.solvedMazes ?? []).push(context);
         }
       },
       builder: (context, state) {
@@ -72,7 +73,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                 const Spacer(),
                 MainButton(
                   onPressed: state.progress == 1 && state.error == null
-                      ? () => context.read<CalculationsServiceCubit>().sendTasks(state.solvedMazes ?? [])
+                      ? () => context.read<CalculationsCubit>().sendTasks(state.solvedMazes ?? [])
                       : null,
                   child: Text(
                     state.isUploaded == null ? "Send results to server" : "Results checked",
