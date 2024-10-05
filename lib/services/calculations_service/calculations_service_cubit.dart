@@ -10,5 +10,7 @@ class CalculationsServiceCubit extends Cubit<CalculationsServiceState> {
 
   final SwaggerRepository swaggerRepository;
 
-  Future<void> sendLink() async {}
+  Future<void> getTask() async {
+    final result = await swaggerRepository.getTask();
+  }
 }

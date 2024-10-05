@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pathfinder/config/routes/app_routes.dart';
 import 'package:pathfinder/config/themes/extensions.dart';
 import 'package:pathfinder/features/enter_url/presentation/bloc/url_verifier/url_verifier_cubit.dart';
 import 'package:pathfinder/features/enter_url/presentation/widgets/enter_url_text_field.dart';
@@ -22,12 +23,7 @@ class _HomePageState extends State<HomePage> {
     return BlocListener<UrlVerifierCubit, UrlVerifierState>(
       listener: (context, state) {
         if (state is UrlVerifiedSuccess) {
-          //context.read<CalculationsServiceCubit>().sendLink();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Success URL'),
-            ),
-          );
+          const ProblemSolvingRoute().push(context);
         } else if (state is UrlVerifiedFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
