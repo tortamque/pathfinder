@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pathfinder/config/routes/app_routes.dart';
 import 'package:pathfinder/config/themes/extensions.dart';
 import 'package:pathfinder/features/problem_solving/presentation/bloc/calculations_cubit/calculations_cubit.dart';
 import 'package:pathfinder/widgets/buttons/main_button.dart';
@@ -31,7 +32,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
           );
         }
         if (state.isUploaded == true) {
-          print('can redirrect');
+          ResultsPreviewRoute($extra: state.solvedMazes ?? []).push(context);
         }
       },
       builder: (context, state) {
