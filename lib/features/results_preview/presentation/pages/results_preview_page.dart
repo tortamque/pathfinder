@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pathfinder/config/routes/app_routes.dart';
 import 'package:pathfinder/config/themes/extensions.dart';
 import 'package:pathfinder/core/shared/domain/entities/solved_maze_model.dart';
 
@@ -21,6 +22,7 @@ class ResultsPreviewPage extends StatelessWidget {
             final solvedMaze = solvedMazes[index];
 
             return ListTile(
+              onTap: () => ViewResultRoute($extra: solvedMaze).push(context),
               title: Center(
                 child: Text(
                   solvedMaze.pathAsString,

@@ -32,7 +32,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
           );
         }
         if (state.isUploaded == true) {
-          ResultsPreviewRoute($extra: state.solvedMazes ?? []).push(context);
+          ResultsPreviewRoute($extra: state.solvedMazes ?? []).pushReplacement(context);
         }
       },
       builder: (context, state) {
