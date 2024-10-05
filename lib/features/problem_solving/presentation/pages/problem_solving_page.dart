@@ -41,7 +41,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
             title: const Text('Process screen'),
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 const Spacer(),

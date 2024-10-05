@@ -15,7 +15,7 @@ class ResultsPreviewPage extends StatelessWidget {
         title: const Text('Result list screen'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.all(16),
         child: ListView.separated(
           itemCount: solvedMazes.length,
           itemBuilder: (context, index) {
