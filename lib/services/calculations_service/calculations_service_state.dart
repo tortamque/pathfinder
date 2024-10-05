@@ -1,15 +1,47 @@
 part of 'calculations_service_cubit.dart';
 
-sealed class CalculationsServiceState {}
+class CalculationsServiceState {
+  final double progress;
+  final String? error;
+  final List<SolvedMazeModel>? solvedMazes;
+  final bool? isUploaded;
 
-final class InitialState extends CalculationsServiceState {}
+  CalculationsServiceState({
+    this.progress = 0,
+    this.error,
+    this.solvedMazes,
+    this.isUploaded,
+  });
 
-final class TaskLoadingState extends CalculationsServiceState {}
+  CalculationsServiceState copyWith({
+    double? progress,
+    String? error,
+    List<SolvedMazeModel>? solvedMazes,
+    bool? isUploaded,
+  }) {
+    return CalculationsServiceState(
+      progress: progress ?? this.progress,
+      error: error ?? this.error,
+      solvedMazes: solvedMazes ?? this.solvedMazes,
+      isUploaded: isUploaded ?? this.isUploaded,
+    );
+  }
 
-final class TaskSolvingState extends CalculationsServiceState {}
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CalculationsServiceState &&
+          runtimeType == other.runtimeType &&
+          progress == other.progress &&
+          error == other.error &&
+          solvedMazes == other.solvedMazes &&
+          isUploaded == other.isUploaded;
 
-final class TaskSolvedState extends CalculationsServiceState {}
+  @override
+  int get hashCode => progress.hashCode ^ error.hashCode;
 
-final class TaskVerificationState extends CalculationsServiceState {}
-
-final class TaskVerifiedState extends CalculationsServiceState {}
+  @override
+  String toString() {
+    return 'CalculationsServiceState(progress: $progress, error: $error, solvedMazes: $solvedMazes, isUploaded: $isUploaded)';
+  }
+}

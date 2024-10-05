@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pathfinder/config/config_model/config_model.dart';
 import 'package:pathfinder/config/data_sources/remote/swagger_repository.dart';
 
 class AppProdiver extends StatelessWidget {
@@ -15,6 +16,7 @@ class AppProdiver extends StatelessWidget {
         RepositoryProvider<SwaggerRepository>(
           create: (context) => SwaggerRepository(
             client: context.read<Dio>(),
+            config: context.read<ConfigModel>(),
           ),
         ),
       ],
