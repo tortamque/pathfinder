@@ -46,13 +46,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
               children: [
                 const Spacer(),
                 Text(
-                  state.solvedMazes == null
-                      ? 'Getting tasks and solving them... 🛠️'
-                      : state.isUploading == true
-                          ? 'Uploading and checking the problem solution 🚀'
-                          : state.solvedMazes != null && state.isUploaded == null
-                              ? 'Problem solved and ready to be checked 🚀'
-                              : 'Tasks solved and checked ✅',
+                  _getStatusText(state),
                   style: context.textStyles.regular,
                 ),
                 Padding(
@@ -88,5 +82,18 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
         );
       },
     );
+  }
+
+  String _getStatusText(CalculationsState state) {
+    if (state.solvedMazes == null) {
+      return 'Getting tasks and solving them... 🛠️';
+    }
+    if (state.isUploading == true) {
+      return 'Uploading and checking the problem solution 🚀';
+    }
+    if (state.solvedMazes != null && state.isUploaded == null) {
+      return 'Problem solved and ready to be checked 🚀';
+    }
+    return 'Tasks solved and checked ✅';
   }
 }
