@@ -66,7 +66,7 @@ class CalculationsCubit extends Cubit<CalculationsState> {
   }
 
   Future<void> sendTasks(List<SolvedMazeModel> solvedMazes) async {
-    emit(state.copyWith(progress: 0));
+    emit(state.copyWith(progress: 0, isUploading: true));
 
     _completer = Completer<void>();
     _updateSendingProgressWhileUploading();
@@ -82,7 +82,11 @@ class CalculationsCubit extends Cubit<CalculationsState> {
       return;
     }
 
-    emit(state.copyWith(isUploaded: true, progress: 1));
+    emit(state.copyWith(
+      isUploaded: true,
+      progress: 1,
+      isUploading: false,
+    ));
   }
 
   Future<void> _updateSendingProgressWhileUploading() async {

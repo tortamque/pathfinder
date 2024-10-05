@@ -48,9 +48,11 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                 Text(
                   state.solvedMazes == null
                       ? 'Getting tasks and solving them... 🛠️'
-                      : state.solvedMazes != null && state.isUploaded == null
-                          ? 'Problem solved and ready to be checked 🚀'
-                          : 'Tasks solved and checked ✅',
+                      : state.isUploading == true
+                          ? 'Uploading and checking the problem solution 🚀'
+                          : state.solvedMazes != null && state.isUploaded == null
+                              ? 'Problem solved and ready to be checked 🚀'
+                              : 'Tasks solved and checked ✅',
                   style: context.textStyles.regular,
                 ),
                 Padding(
