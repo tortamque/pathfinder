@@ -23,7 +23,16 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<CalculationsServiceCubit, CalculationsServiceState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state.error != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error!),
+            ),
+          );
+        }
+        if (state.isUploaded == true) {
+          print('can redirrect');
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -44,7 +53,7 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: Text(
-                    '${state is TaskLoadingState ? (state.progress * 100).floor() : 0}%',
+                    '${(state.progress * 100).floor()}%',
                     style: context.textStyles.regular,
                   ),
                 ),
@@ -54,15 +63,17 @@ class _ProblemSolvingPageState extends State<ProblemSolvingPage> {
                   child: SizedBox.square(
                     dimension: 72,
                     child: CircularProgressIndicator(
-                      value: state is TaskLoadingState ? state.progress : 0,
+                      value: state.progress,
                       strokeCap: StrokeCap.round,
                     ),
                   ),
                 ),
                 const Spacer(),
                 MainButton(
-                  onPressed: (state is TaskLoadingState ? state.progress : 0) == 100 ? () {} : null,
-                  child: Text("Send results to server"),
+                  onPressed: state.progress == 1 && state.error == null
+                      ? () => context.read<CalculationsServiceCubit>().sendTasks(state.solvedMazes ?? [])
+                      : null,
+                  child: const Text("Send results to server"),
                 )
               ],
             ),
