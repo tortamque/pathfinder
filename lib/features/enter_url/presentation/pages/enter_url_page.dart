@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return BlocListener<UrlVerifierCubit, UrlVerifierState>(
       listener: (context, state) {
         if (state is UrlVerifiedSuccess) {
-          const ProblemSolvingRoute().push(context);
+          ProblemSolvingRoute($extra: state.url).push(context);
         } else if (state is UrlVerifiedFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text('Home Screen'),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,13 +52,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: MainButton(
-                  onPressed: () => context.read<UrlVerifierCubit>().verifyUrl(input),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: const Text('Start counting process'),
-                ),
+              MainButton(
+                onPressed: () => context.read<UrlVerifierCubit>().verifyUrl(input),
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                child: const Text('Start counting process'),
               ),
             ],
           ),

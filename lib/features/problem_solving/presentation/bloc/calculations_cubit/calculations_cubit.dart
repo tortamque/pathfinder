@@ -39,7 +39,7 @@ class CalculationsCubit extends Cubit<CalculationsState> {
       if (progress <= 49) {
         emit(state.copyWith(progress: progress / 100));
       }
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future.delayed(const Duration(milliseconds: 300));
     }
   }
 
@@ -66,7 +66,7 @@ class CalculationsCubit extends Cubit<CalculationsState> {
   }
 
   Future<void> sendTasks(List<SolvedMazeModel> solvedMazes) async {
-    emit(state.copyWith(progress: 0));
+    emit(state.copyWith(progress: 0, isUploading: true));
 
     _completer = Completer<void>();
     _updateSendingProgressWhileUploading();
@@ -78,11 +78,15 @@ class CalculationsCubit extends Cubit<CalculationsState> {
     _completer?.complete();
 
     if (result is ErrorResponse) {
-      emit(state.copyWith(error: result.error));
+      emit(state.copyWith(error: result.error.toString()));
       return;
     }
 
-    emit(state.copyWith(isUploaded: true, progress: 1));
+    emit(state.copyWith(
+      isUploaded: true,
+      progress: 1,
+      isUploading: false,
+    ));
   }
 
   Future<void> _updateSendingProgressWhileUploading() async {

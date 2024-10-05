@@ -42,20 +42,24 @@ RouteBase get $problemSolvingRoute => GoRouteData.$route(
 
 extension $ProblemSolvingRouteExtension on ProblemSolvingRoute {
   static ProblemSolvingRoute _fromState(GoRouterState state) =>
-      const ProblemSolvingRoute();
+      ProblemSolvingRoute(
+        $extra: state.extra as Uri,
+      );
 
   String get location => GoRouteData.$location(
         '/problem-solving',
       );
 
-  void go(BuildContext context) => context.go(location);
+  void go(BuildContext context) => context.go(location, extra: $extra);
 
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+      context.pushReplacement(location, extra: $extra);
 
-  void replace(BuildContext context) => context.replace(location);
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
 }
 
 RouteBase get $resultsPreviewRoute => GoRouteData.$route(
