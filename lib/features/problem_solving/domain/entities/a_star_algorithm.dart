@@ -1,10 +1,12 @@
+import 'package:pathfinder/core/shared/domain/entities/maze_cell.dart';
 import 'package:pathfinder/core/shared/domain/entities/maze_data.dart';
 import 'package:pathfinder/core/shared/domain/entities/position.dart';
+import 'package:pathfinder/core/shared/domain/entities/solved_maze_model.dart';
 import 'package:pathfinder/features/problem_solving/domain/entities/a_star_node.dart';
 import 'package:collection/collection.dart';
 
 class AStarAlgorithm {
-  static Map<String, dynamic> solveMaze(MazeData mazeData) {
+  static SolvedMazeModel solveMaze(MazeData mazeData) {
     List<String> field = mazeData.field;
     Position start = mazeData.start;
     Position end = mazeData.end;
@@ -31,14 +33,23 @@ class AStarAlgorithm {
     gScore[start] = 0;
     cameFrom[start] = null;
 
+    List<Position> pathPositions = [];
+
     while (priorityQueue.isNotEmpty) {
       AStarNode current = priorityQueue.removeFirst();
 
       if (current.position == end) {
-        return {
-          'id': mazeData.id,
-          'path': _reconstructPath(cameFrom, current.position),
-        };
+        pathPositions = _reconstructPath(cameFrom, current.position);
+        String pathAsString = pathPositions.map((pos) => '(${pos.x},${pos.y})').join('->');
+
+        return SolvedMazeModel(
+          id: mazeData.id,
+          maze: _convertFieldToMaze(mazeData, pathPositions),
+          start: start,
+          end: end,
+          path: pathPositions,
+          pathAsString: pathAsString,
+        );
       }
 
       for (var direction in directions) {
@@ -59,26 +70,49 @@ class AStarAlgorithm {
       }
     }
 
-    return {
-      'id': mazeData.id,
-      'path': 'No path found',
-    };
+    return SolvedMazeModel(
+      id: mazeData.id,
+      maze: _convertFieldToMaze(mazeData, []),
+      start: start,
+      end: end,
+      path: [],
+      pathAsString: 'No path found',
+    );
   }
 
-  static List<Map<String, int>> _reconstructPath(
+  static List<Position> _reconstructPath(
     Map<Position, Position?> cameFrom,
     Position current,
   ) {
-    List<Map<String, int>> totalPath = [];
-
+    List<Position> totalPath = [];
     Position? currentPos = current;
 
     while (currentPos != null) {
-      totalPath.add({'x': currentPos.x, 'y': currentPos.y});
-
+      totalPath.add(currentPos);
       currentPos = cameFrom[currentPos];
     }
 
     return totalPath.reversed.toList();
+  }
+
+  static List<List<MazeCell>> _convertFieldToMaze(MazeData mazeData, List<Position> pathPositions) {
+    List<List<MazeCell>> maze = List.generate(
+      mazeData.field.length,
+      (i) => List.generate(mazeData.field[i].length, (j) {
+        if (mazeData.field[i][j] == 'X') return MazeCell.blocked;
+        return MazeCell.empty;
+      }),
+    );
+
+    maze[mazeData.start.y][mazeData.start.x] = MazeCell.start;
+    maze[mazeData.end.y][mazeData.end.x] = MazeCell.end;
+
+    for (var pos in pathPositions) {
+      if (pos != mazeData.start && pos != mazeData.end) {
+        maze[pos.y][pos.x] = MazeCell.path;
+      }
+    }
+
+    return maze;
   }
 }
