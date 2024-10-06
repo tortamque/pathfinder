@@ -32,17 +32,6 @@ class CalculationsCubit extends Cubit<CalculationsState> {
     solveTasks(result.data);
   }
 
-  Future<void> _updateLoadingProgressWhileLoading() async {
-    double progress = 0;
-    while (!_completer!.isCompleted) {
-      progress += 1;
-      if (progress <= 49) {
-        emit(state.copyWith(progress: progress / 100));
-      }
-      await Future.delayed(const Duration(milliseconds: 300));
-    }
-  }
-
   Future<MazeResponse?> getTasks() async {
     final result = await swaggerRepository.getTask();
     if (result is ErrorResponse) {
@@ -87,6 +76,17 @@ class CalculationsCubit extends Cubit<CalculationsState> {
       progress: 1,
       isUploading: false,
     ));
+  }
+
+  Future<void> _updateLoadingProgressWhileLoading() async {
+    double progress = 0;
+    while (!_completer!.isCompleted) {
+      progress += 1;
+      if (progress <= 49) {
+        emit(state.copyWith(progress: progress / 100));
+      }
+      await Future.delayed(const Duration(milliseconds: 300));
+    }
   }
 
   Future<void> _updateSendingProgressWhileUploading() async {
