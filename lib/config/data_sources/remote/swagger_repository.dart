@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pathfinder/config/config_model/config_model.dart';
 import 'package:pathfinder/core/network/app_response.dart';
 import 'package:pathfinder/core/shared/domain/entities/maze_response.dart';
-import 'package:pathfinder/core/shared/domain/entities/send_task.dart';
+import 'package:pathfinder/core/shared/domain/entities/send_task_response.dart';
 
 class SwaggerRepository {
   SwaggerRepository({
